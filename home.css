@@ -1,0 +1,258 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+img{
+    width: 100%;
+}
+body{
+    background-color: #ddd;
+    font-size: 18px;
+    font-family: 'Zen Atique Soft',Arial, Helvetica, sans-serif;
+    margin: 50px;
+}
+/* Container */
+.container{
+    display: grid;
+    gap: 10px;
+}
+/* Header */
+.header{
+    display: grid;
+    grid-template-areas: 
+        'tulisan features'
+        'tulisan features-2';
+}
+.tulisan{
+    grid-area: tulisan;
+    min-height: 350px;
+    background-image: url("makanan.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: 50px
+}
+.tulisan > *{
+    display: none;
+}
+.features ,.features-2{
+    background-color: black;
+    color: black;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+.features{
+    grid-area: features;
+    background-image: url("burger.jpeg");
+    background-size: cover;
+}
+.features-2{
+    grid-area: features-2;
+    background-image: url("coca.jpg");
+    background-size: cover;
+}
+.features .price,.features-2 .price{
+    font-size: 2em;
+    font-weight: 200;
+}
+/* Navigasi */
+.menu{
+    order: -1;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    background-color: black;
+}
+.menu .brand{
+    font-size: 1.2em;
+    color: white;
+    padding: 5px;
+}
+.menu ul{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+    gap: 5px;
+}
+.menu a:link,.menu a:visited{
+    display: block;
+    text-decoration: none;
+    background-color: #000;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+.menu a:hover,.menu a:active{
+    background-color: rgb(4, 165, 4);
+}
+.menu-toggle{
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20px;
+    position: relative;
+    z-index: 2;
+}
+.menu-toggle span{
+    display: block;
+    width: 20px;
+    height: 3px;
+    background: black;
+    border-radius: 3px;
+    transition: all 0.5s;
+}
+.menu-toggle input{
+    display: block;
+    position: absolute;
+    background-color: black;
+    width: 40px;
+    height: 20px;
+    left: -5px;
+    top: -5px;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 2;
+}
+.menu-toggle span:nth-child(2){
+    transform-origin: 0 0;
+}
+.menu-toggle span:nth-child(4){
+    transform-origin: 0 100%;
+}
+.menu-toggle input:checked ~ span:nth-child(2){
+    background-color: white;
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+.menu-toggle input:checked ~ span:nth-child(4){
+    background-color: white;
+    transform: rotate(-45deg) translate(-1px,0);
+}
+.menu-toggle input:checked ~ span:nth-child(3){
+    opacity: 0;
+    transform: scale(0);
+}
+img.icon{
+    width: 10%;
+    padding-top: 2px;
+}
+/* Service */
+.services{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 20px;
+}
+.service{
+    background-color: white;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+.service .icon{
+    font-size: 3em;
+}
+.service h3{
+    font-size: 1.2em;
+}
+.service p{
+    font-size: 1em;
+    font-weight: 200;
+    letter-spacing: 0.5px;
+
+}
+/* Gallery */
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    margin-top: 100px;
+    gap: 5px;
+}
+.gallery img{
+    width: 200px;
+    height: 200px;
+}
+.gallery h2{
+    grid-column-start: 1;
+    grid-column-end: -1;
+    text-align: center;
+    margin-bottom: 20px;
+}
+input{
+    width: 200px;
+    height: 20px;
+}
+button{
+    width: 100px;
+    height: 20px;
+    background-color: rgb(2, 197, 2);
+    border-radius: 0px 0px 1px 1px;
+}
+footer{
+    margin-top: 5%;
+}
+
+/* Responsive breakpoint */
+@media (max-width:1024px){
+    .menu{
+        order: inherit; 
+        grid-template-columns: 1fr;
+    }
+    .menu .brand{
+        display: none;
+    }
+    .tulisan > *{
+        display: block;
+        background-color: black;
+        color: white;
+        padding: 5px;
+        margin-bottom: 5px;
+    }
+    .tulisan{
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: center;
+    }
+}
+@media (max-width:768px){
+    .menu{
+        order: -1;
+        justify-items: end;
+    }
+    .menu-toggle{
+        display: flex;
+    }
+    .menu ul{
+        display: flex;
+        position: relative;
+        right: 0;
+        height: 100vh;
+        top: 0;
+        background-color: black;
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        z-index: -1;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all 1s;
+        
+    }
+    .menu ul.slide{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@media (max-width:600px){
+    .header{
+        grid-template-areas: 
+        'tulisan'
+        'features'
+        'features2';
+    }
+}
